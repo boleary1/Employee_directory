@@ -4,7 +4,7 @@ import React from "react";
 function List(props) {
   return (
     <ul className="list-group">
-      {props.employeeArray.map(item => (
+      {props.employees.map(item => (
         <li className="list-group-item" key={item.id.value}>
           {item.name.first}
         </li>
