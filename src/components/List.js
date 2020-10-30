@@ -1,85 +1,61 @@
 import React from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import Moment from 'react-moment';
 
+const columns = [
+  {
+    dataField: 'image',
+    text: 'Image',
+  },
+  {
+    dataField: 'name',
+    text: 'Name',
+    sort: true,
 
-const columns2 = [{
-  dataField: 'id',
-  text: 'Product ID'
-}, {
-  dataField: 'name',
-  text: 'Product Name'
-}, {
-  dataField: 'price',
-  text: 'Product Price'
+  },
+  {
+    dataField: 'phone',
+    text: 'Phone Number'
+  }, {
+    dataField: 'email',
+    text: 'Email adress',
+    sort: true,
+  },
+  {
+    dataField: 'birthdate',
+    text: 'DOB'
+  },];
+
+const employeeArray = [];
+const defaultSorted = [{
+  dataField: 'email', // if dataField is not match to any column you defined, it will be ignored.
+  order: 'asc' // desc or asc
 }];
-
-const columns = [{
-  dataField: 'image',
-  text: 'Image'
-}, 
-{
-  dataField: 'name',
-  text: 'Name'
-}, 
-{
-  dataField: 'phone',
-  text: 'Phone Number'
-}, {
-  dataField: 'email',
-  text: 'Email adress'
-},
-{
-  dataField: 'birthdate',
-  text: 'DOB'
-}, ];
-const employees = [{
-  image: "1",
-  name: "fddsf",
-  phone: "2152",
-  email: "dfvgfv",
-  birthdate: "sdfs"
-},];
-
-
-const products = [{
-  id: "1",
-  name: "fddsf",
-  price: "2152"
-},
-{
-  id: "2",
-  name: "fddxfvsf",
-  price: "21752"
-},
-{
-  id: "3",
-  name: "fddfdvfdbsf",
-  price: "215552"
-},
-{
-  id: "4",
-  name: "fddfgvfdvdfdsf",
-  price: "21542"
-},];
 
 // Whenever we try to render an array containing JSX, React knows to render each JSX element separately
 function List(props) {
+  {
+    props.employees.map(item => employeeArray.push(
+      {
+        image: "<image src=" + item.picture.thumbnail + "/>,",
+        name: item.name.first + " " + item.name.last,
+        phone: item.phone,
+        email: item.email,
+        birthdate: item.dob.date
+            },
+    ))
+  }
+
   return (
 
-    <ul className="list-group">
-      {props.employees.map(item => (
-        <li className="list-group-item" key={item.id.value}>
-          {item.name.first}
-        </li>
-      ))}
-    </ul>
+    <BootstrapTable
+      keyField='email'
+      data={employeeArray}
+      columns={columns}
+      defaultSorted={ defaultSorted } 
+      striped />
   );
 }
 
-// export default List;
-export default () =>
-<BootstrapTable keyField='email' data={ employees } columns={ columns } />;
-<BootstrapTable keyField='id' data={ products } columns={ columns2 } />;
-
-
+export default List;
