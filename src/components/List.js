@@ -28,6 +28,12 @@ const columns = [
   },];
 
 const employeeArray = [];
+function dateFormat(birthDate) {
+  let x = birthDate.substring(0, 4)
+  let y = birthDate.substring(6, 7)
+
+  return (x + "/" + y)
+}
 const defaultSorted = [{
   dataField: 'email', // if dataField is not match to any column you defined, it will be ignored.
   order: 'asc' // desc or asc
@@ -42,7 +48,7 @@ function List(props) {
         name: item.name.first + " " + item.name.last,
         phone: item.phone,
         email: item.email,
-        birthdate: item.dob.date
+        birthdate: dateFormat(item.dob.date)
             },
     ))
   }
