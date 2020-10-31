@@ -29,6 +29,11 @@ const columns = [
 
 const employeeArray = [];
 
+function imageFormat(headshot) {
+  console.log(headshot)
+  return `<img src= ${headshot} /> `; 
+  };
+
 function dateFormat(date) {
   return date.substring(5, 7) + "/" + date.substring(8, 10) + "/" + date.substring(0, 4); 
   };
@@ -43,7 +48,8 @@ function List(props) {
   {
     props.employees.map(item => employeeArray.push(
       {
-        image: "<image src=" + item.picture.thumbnail + "/>,",
+        image: imageFormat(item.picture.thumbnail),
+        // image: "<image src=" + item.picture.thumbnail + "/>,",
         name: item.name.first + " " + item.name.last,
         phone: item.phone,
         email: item.email,
