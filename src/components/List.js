@@ -28,12 +28,11 @@ const columns = [
   },];
 
 const employeeArray = [];
-function dateFormat(birthDate) {
-  let x = birthDate.substring(0, 4)
-  let y = birthDate.substring(6, 7)
 
-  return (x + "/" + y)
-}
+function dateFormat(date) {
+  return date.substring(5, 7) + "/" + date.substring(8, 10) + "/" + date.substring(0, 4); 
+  };
+
 const defaultSorted = [{
   dataField: 'email', // if dataField is not match to any column you defined, it will be ignored.
   order: 'asc' // desc or asc
