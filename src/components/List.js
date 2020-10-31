@@ -2,11 +2,14 @@ import React from "react";
 import BootstrapTable from 'react-bootstrap-table-next';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import Moment from 'react-moment';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+const { SearchBar } = Search;
 
 const columns = [
   {
     dataField: 'image',
     text: 'Image',
+    dataFormat:{format}
   },
   {
     dataField: 'name',
@@ -31,12 +34,18 @@ const employeeArray = [];
 
 function imageFormat(headshot) {
   console.log(headshot)
-  return `<img src= ${headshot} /> `; 
+  return `<div><img src= ${headshot} /> </div>`; 
   };
 
 function dateFormat(date) {
   return date.substring(5, 7) + "/" + date.substring(8, 10) + "/" + date.substring(0, 4); 
   };
+
+  function format(cell, row){
+    console.log("in format")
+    return '<img class="glyphicon glyphicon-usd"></img> ' + cell;
+    
+  }
 
 const defaultSorted = [{
   dataField: 'email', // if dataField is not match to any column you defined, it will be ignored.
@@ -49,7 +58,7 @@ function List(props) {
     props.employees.map(item => employeeArray.push(
       {
         image: imageFormat(item.picture.thumbnail),
-        // image: "<image src=" + item.picture.thumbnail + "/>,",
+        // image: item.picture.thumbnail,
         name: item.name.first + " " + item.name.last,
         phone: item.phone,
         email: item.email,
@@ -59,13 +68,15 @@ function List(props) {
   }
 
   return (
-
+    <div>
+    <SearchBar { ...props.searchProps } />
     <BootstrapTable
       keyField='email'
       data={employeeArray}
       columns={columns}
       defaultSorted={ defaultSorted } 
       striped />
+      </div>
   );
 }
 
