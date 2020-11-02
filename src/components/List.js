@@ -36,6 +36,12 @@ function dateFormat(birthdate) {
   return birthdate.substring(5, 7) + "/" + birthdate.substring(8, 10) + "/" + birthdate.substring(0, 4); 
   };
 
+  function format(cell, row){
+    console.log("in format")
+    return '<img class="glyphicon glyphicon-usd"></img> ' + cell;
+    
+  }
+
 const defaultSorted = [{
   dataField: 'email', // if dataField is not match to any column you defined, it will be ignored.
   order: 'asc' // desc or asc
